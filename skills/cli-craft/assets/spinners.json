@@ -1,0 +1,10 @@
+{
+  "_comment": "Curated spinners. interval in ms. ascii is the fallback set for non UTF-8 terminals. Frames derived from the public domain cli-spinners set and hand tuned.",
+  "dots":   { "interval": 80,  "frames": ["\u280b", "\u2819", "\u2839", "\u2838", "\u283c", "\u2834", "\u2826", "\u2827", "\u2807", "\u280f"], "ascii": ["-", "\\", "|", "/"] },
+  "line":   { "interval": 100, "frames": ["-", "\\", "|", "/"], "ascii": ["-", "\\", "|", "/"] },
+  "arc":    { "interval": 100, "frames": ["\u25dc", "\u25e0", "\u25dd", "\u25de", "\u25e1", "\u25df"], "ascii": ["<", "^", ">", "v"] },
+  "bounce": { "interval": 80,  "frames": ["[    ]", "[=   ]", "[==  ]", "[=== ]", "[ ===]", "[  ==]", "[   =]", "[    ]", "[   =]", "[  ==]", "[ ===]", "[====]", "[=== ]", "[==  ]", "[=   ]"], "ascii": ["[    ]", "[=   ]", "[==  ]", "[=== ]", "[ ===]", "[  ==]", "[   =]", "[    ]"] },
+  "pulse":  { "interval": 120, "frames": ["\u25cb", "\u25d4", "\u25d1", "\u25d5", "\u25cf", "\u25d5", "\u25d1", "\u25d4"], "ascii": [".", "o", "O", "o"] },
+  "dots_small": { "interval": 80, "frames": ["\u2801", "\u2802", "\u2804", "\u2840", "\u2880", "\u2820", "\u2810", "\u2808"], "ascii": [".", ":", "'", ":"] },
+  "agent_verbs": ["Thinking", "Reasoning", "Reading", "Planning", "Checking", "Composing", "Considering", "Working"]
+}

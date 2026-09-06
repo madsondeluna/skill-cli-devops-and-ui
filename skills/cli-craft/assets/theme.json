@@ -1,0 +1,68 @@
+{
+  "_comment": "cli-craft default theme 'aurora'. Roles, not raw colors, are what code refers to. dark and light are the truecolor sets; c256 and c16 are the fallbacks. gradient stops are decorative only and never carry text.",
+  "name": "aurora",
+  "dark": {
+    "fg": "#E6E9F0",
+    "muted": "#8B95A9",
+    "dim": "#5C6577",
+    "accent": "#6FA3FF",
+    "accent2": "#B49CFF",
+    "teal": "#3DDBC7",
+    "ok": "#6EE39C",
+    "warn": "#F2C56B",
+    "err": "#FF7B8E",
+    "info": "#7CD5FF",
+    "border": "#3A4258",
+    "bg_panel": "#161A26",
+    "bg_select": "#243052"
+  },
+  "light": {
+    "fg": "#1B2030",
+    "muted": "#5B6472",
+    "dim": "#8A93A3",
+    "accent": "#2358D6",
+    "accent2": "#6B33D6",
+    "teal": "#0F7A6E",
+    "ok": "#1B7A3E",
+    "warn": "#8A5A00",
+    "err": "#C4283A",
+    "info": "#0B6FA8",
+    "border": "#CDD3DE",
+    "bg_panel": "#F4F6FA",
+    "bg_select": "#DDE6FF"
+  },
+  "c256": {
+    "fg": "default", "muted": "245", "dim": "240", "accent": "75", "accent2": "141", "teal": "80",
+    "ok": "114", "warn": "221", "err": "210", "info": "117", "border": "238", "bg_panel": "234", "bg_select": "237"
+  },
+  "c16": {
+    "fg": "default", "muted": "bright_black", "dim": "bright_black", "accent": "blue", "accent2": "magenta", "teal": "cyan",
+    "ok": "green", "warn": "yellow", "err": "red", "info": "cyan", "border": "bright_black", "bg_panel": "none", "bg_select": "blue"
+  },
+  "gradient": {
+    "aurora_dark":  ["#3DDBC7", "#38BDF8", "#5B9CFF", "#8B7BFF", "#C084FC"],
+    "aurora_light": ["#0F766E", "#0284C7", "#2358D6", "#5B3FD1", "#8A3FC4"],
+    "c256": ["80", "75", "111", "141"],
+    "phase_step_deg": 6,
+    "fps": 15,
+    "reveal_ms": 1200
+  },
+  "glyphs": {
+    "ok":      {"unicode": "\u2713", "ascii": "ok"},
+    "err":     {"unicode": "\u2717", "ascii": "x"},
+    "warn":    {"unicode": "\u25b2", "ascii": "!"},
+    "info":    {"unicode": "\u25cf", "ascii": "*"},
+    "pending": {"unicode": "\u25cb", "ascii": "o"},
+    "pointer": {"unicode": "\u276f", "ascii": ">"},
+    "bullet":  {"unicode": "\u2022", "ascii": "*"},
+    "ellipsis":{"unicode": "\u2026", "ascii": "..."},
+    "bar_fill":{"unicode": "\u2588", "ascii": "#"},
+    "bar_empty":{"unicode": "\u2591", "ascii": "-"},
+    "rule":    {"unicode": "\u2500", "ascii": "-"}
+  },
+  "box": {
+    "rounded": {"tl": "\u256d", "tr": "\u256e", "bl": "\u2570", "br": "\u256f", "h": "\u2500", "v": "\u2502"},
+    "light":   {"tl": "\u250c", "tr": "\u2510", "bl": "\u2514", "br": "\u2518", "h": "\u2500", "v": "\u2502"},
+    "ascii":   {"tl": "+", "tr": "+", "bl": "+", "br": "+", "h": "-", "v": "|"}
+  }
+}

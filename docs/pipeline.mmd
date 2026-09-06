@@ -1,0 +1,8 @@
+flowchart LR
+  in["input"] --> parse["parse and validate"]
+  parse -->|"invalid"| err["error: line N, exit 1"]
+  parse --> stream["stream records"]
+  stream --> work["work in pool, --jobs N"]
+  work --> merge["merge by index, deterministic order"]
+  merge --> out["stdout: table or --json"]
+  work -.->|"progress"| bar["stderr: progress bar"]
