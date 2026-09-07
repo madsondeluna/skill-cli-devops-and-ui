@@ -10,38 +10,76 @@ The two goals are not in tension. The same discipline that makes output pipe
 safe is what lets visual polish be applied without breaking anything.
 
 ```
- ██████╗██╗     ██╗       ██████╗██████╗  █████╗ ███████╗████████╗
-██╔════╝██║     ██║      ██╔════╝██╔══██╗██╔══██╗██╔════╝╚══██╔══╝
-██║     ██║     ██║█████╗██║     ██████╔╝███████║█████╗     ██║
-██║     ██║     ██║╚════╝██║     ██╔══██╗██╔══██║██╔══╝     ██║
-╚██████╗███████╗██║      ╚██████╗██║  ██║██║  ██║██║        ██║
- ╚═════╝╚══════╝╚═╝       ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝        ╚═╝
+ ██████╗██╗     ██╗    ██████╗ ███████╗██╗   ██╗ ██████╗ ██████╗ ███████╗
+██╔════╝██║     ██║    ██╔══██╗██╔════╝██║   ██║██╔═══██╗██╔══██╗██╔════╝
+██║     ██║     ██║    ██║  ██║█████╗  ██║   ██║██║   ██║██████╔╝███████╗
+██║     ██║     ██║    ██║  ██║██╔══╝  ╚██╗ ██╔╝██║   ██║██╔═══╝ ╚════██║
+╚██████╗███████╗██║    ██████╔╝███████╗ ╚████╔╝ ╚██████╔╝██║     ███████║
+ ╚═════╝╚══════╝╚═╝    ╚═════╝ ╚══════╝  ╚═══╝   ╚═════╝ ╚═╝     ╚══════╝
+                    cli-devops-with-ultimate-ui
 ```
 
 ## Install
 
-Download `cli-devops-with-ultimate-ui.skill` from the latest release, or build it:
+The package is a folder with `SKILL.md` at its root, the Agent Skills format,
+which every agent below reads. One `make` target per destination:
+
+| Agent | Command | Where it lands |
+| --- | --- | --- |
+| Claude Code | `make install` | `~/.claude/skills/cli-devops-with-ultimate-ui` |
+| Codex | `make install-codex` | `~/.agents/skills/cli-devops-with-ultimate-ui` |
+| Gemini CLI | `make install-gemini` | linked through `gemini skills link` |
+| Claude.ai | `make package`, then upload | Settings, Capabilities, Skills, Upload skill |
+
+```
+make install          # Claude Code
+make verify-install   # fails when the installed copy has drifted from this tree
+make install-all      # Claude Code and Codex in one go
+```
+
+A skill that lives only in this repository is not available to any of them. If
+an agent names the skill and then cannot load it, the installed copy is missing
+or stale, and `make install` is the fix. `make verify-install` is what tells
+the two apart.
+
+### Codex
+
+Codex searches, by scope: `$CWD/.agents/skills`, `$CWD/../.agents/skills`,
+`$REPO_ROOT/.agents/skills`, `$HOME/.agents/skills`, `/etc/codex/skills`, then
+its bundled set. `make install-codex` writes the home scope. For one repository
+only, copy the folder into that repository's `.agents/skills/` instead.
+
+### Gemini CLI
+
+```
+gemini skills link $(pwd)/skills/cli-devops-with-ultimate-ui   # tracks this tree
+gemini skills install https://github.com/madsondeluna/skill-cli-devops-and-ui
+gemini skills list
+```
+
+`link` follows the working tree, so an edit here is live in the next session;
+`install` takes a copy from the git URL. `make install-gemini` runs the link
+form.
+
+### Antigravity
+
+Antigravity reads the same `SKILL.md` format. Its bundled skills sit in
+`~/.gemini/antigravity-cli/builtin/skills/`, one folder each, with the same
+`name` and `description` frontmatter this package uses. Place the folder in the
+skills directory your version reads, alongside the built-in set.
+
+### Claude.ai
 
 ```
 make package        # writes dist/cli-devops-with-ultimate-ui.skill
 ```
 
-Claude.ai: Settings, Capabilities, Skills, Upload skill.
-
-Claude Code:
-
-```
-make install          # copies into ~/.claude/skills/cli-devops-with-ultimate-ui
-make verify-install   # fails when the installed copy has drifted from this tree
-```
-
-A skill that lives only in this repository is not available to Claude Code. If
-the model names the skill and then cannot load it, the installed copy is
-missing or stale; `make install` is the fix.
+Settings, Capabilities, Skills, Upload skill.
 
 Then ask for a CLI. The skill triggers on requests to create, review or polish
 any command line tool, TUI, REPL, agent console, progress bar, banner, help
-text or exit code handling.
+text or exit code handling, and on argument parser work in argparse, click,
+typer, cobra, clap, commander or oclif.
 
 ## Two modes
 

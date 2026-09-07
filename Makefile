@@ -2,10 +2,12 @@
 SKILL := skills/cli-devops-with-ultimate-ui
 PY    := python3
 
+NAME          := cli-devops-with-ultimate-ui
 CLAUDE_SKILLS := $(HOME)/.claude/skills
-INSTALLED     := $(CLAUDE_SKILLS)/cli-devops-with-ultimate-ui
+INSTALLED     := $(CLAUDE_SKILLS)/$(NAME)
+CODEX_SKILLS  := $(HOME)/.agents/skills
 
-.PHONY: help test audit refs style check example demo palette package install uninstall verify-install clean
+.PHONY: help test audit refs style check example demo palette package install install-codex install-gemini install-all uninstall verify-install clean
 
 help:
 	@echo "test     run the template unit tests"
@@ -17,7 +19,10 @@ help:
 	@echo "palette  print the palette and its WCAG contrast table"
 	@echo "package  build dist/cli-devops-with-ultimate-ui.skill for upload to Claude"
 	@echo "install  copy the skill into ~/.claude/skills for Claude Code"
-	@echo "uninstall remove it from ~/.claude/skills"
+	@echo "install-codex   copy it into ~/.agents/skills for Codex"
+	@echo "install-gemini  link it into Gemini CLI"
+	@echo "install-all     Claude Code and Codex"
+	@echo "uninstall remove it from ~/.claude/skills and ~/.agents/skills"
 	@echo "verify-install  fail if the installed copy differs from this tree"
 	@echo "clean    remove build artifacts and caches"
 
@@ -83,9 +88,21 @@ install:
 	cp -R $(SKILL) $(INSTALLED)
 	@echo "installed $(INSTALLED)"
 
+install-codex:
+	mkdir -p $(CODEX_SKILLS)
+	rm -rf $(CODEX_SKILLS)/$(NAME)
+	cp -R $(SKILL) $(CODEX_SKILLS)/$(NAME)
+	@echo "installed $(CODEX_SKILLS)/$(NAME)"
+
+# link, not copy: an edit in this tree is live in the next session
+install-gemini:
+	gemini skills link $(CURDIR)/$(SKILL)
+
+install-all: install install-codex
+
 uninstall:
-	rm -rf $(INSTALLED)
-	@echo "removed $(INSTALLED)"
+	rm -rf $(INSTALLED) $(CODEX_SKILLS)/$(NAME)
+	@echo "removed $(INSTALLED) and $(CODEX_SKILLS)/$(NAME)"
 
 # Drift between the repository and the installed copy is silent otherwise: the
 # model lists a skill by name and then cannot load it.
