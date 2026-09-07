@@ -243,13 +243,20 @@ def check_help(cmd, timeout):
 
 
 def check_version(cmd, timeout):
-    for flag in ("--version", "-V"):
-        rc, out, err = run_pipe(cmd + [flag], base_env(), timeout)
-        if rc == 0 and (out + err).strip():
-            lines = (out + err).strip().splitlines()
-            if len(lines) > 2:
-                add("minor", "version", f"{flag} printed {len(lines)} lines (one is conventional)")
-            return
+    # A version flag belongs to the program, not to the subcommand the audit was
+    # pointed at, so `tool sub file --version` failing proves nothing. Probe the
+    # given argv first, then the bare executable.
+    targets = [cmd]
+    if len(cmd) > 1:
+        targets.append(cmd[:1])
+    for target in targets:
+        for flag in ("--version", "-V"):
+            rc, out, err = run_pipe(target + [flag], base_env(), timeout)
+            if rc == 0 and (out + err).strip():
+                lines = (out + err).strip().splitlines()
+                if len(lines) > 2:
+                    add("minor", "version", f"{flag} printed {len(lines)} lines (one is conventional)")
+                return
     add("minor", "version", "no --version or -V")
 
 

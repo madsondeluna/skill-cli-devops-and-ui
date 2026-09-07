@@ -155,13 +155,38 @@ _common = dict(theme=_rich_theme, emoji=False, highlight=False, width=env.width,
                legacy_windows=False)
 
 
+_SYNC_ON, _SYNC_OFF = "\x1b[?2026h", "\x1b[?2026l"
+
+
+class _SyncConsole(Console):
+    """Console whose every flush is one atomic paint (DEC 2026).
+
+    Rich emits a live frame as several writes: cursor up, erase, then the new
+    rows. A terminal that repaints between them shows the half drawn frame,
+    which is the tearing seen in tmux and over SSH. Bracketing the buffer flush
+    in synchronized output makes the terminal hold the frame until it is whole.
+    Ignored by terminals that do not implement it.
+    """
+
+    def _write_buffer(self) -> None:
+        if self.is_terminal and self._buffer:
+            self.file.write(_SYNC_ON)
+            try:
+                super()._write_buffer()
+            finally:
+                self.file.write(_SYNC_OFF)
+                self.file.flush()
+        else:
+            super()._write_buffer()
+
+
 def _console(stream: Any, is_tty: bool) -> Console:
     # Rich treats force_terminal=False as "auto detect", so a non TTY stream must
     # be told explicitly that it has no color system at all.
     if is_tty and env.color:
         cs = {16: "standard", 256: "256"}.get(env.depth, "truecolor")
-        return Console(file=stream, force_terminal=True, color_system=cs, **_common)
-    return Console(file=stream, force_terminal=False, no_color=True, color_system=None, **_common)
+        return _SyncConsole(file=stream, force_terminal=True, color_system=cs, **_common)
+    return _SyncConsole(file=stream, force_terminal=False, no_color=True, color_system=None, **_common)
 
 
 console = _console(sys.stdout, env.stdout_tty)
@@ -270,7 +295,6 @@ def gradient_rule(width: int | None = None, phase: float = 0.0) -> Text:
 # Chrome: banner, status, progress, messages (all on stderr)
 # ---------------------------------------------------------------------------
 
-_SYNC_ON, _SYNC_OFF = "\x1b[?2026h", "\x1b[?2026l"
 
 
 _FONT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "font-shadow.json")
