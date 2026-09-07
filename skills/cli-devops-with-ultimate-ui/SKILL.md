@@ -1,6 +1,6 @@
 ---
 name: cli-devops-with-ultimate-ui
-description: Builds, reviews and polishes command line tools and terminal UIs that are robust (pipe safe, CI safe, scriptable, typed, tested) and visually excellent (animated teal to blue to violet gradients, spinners, progress, live panels, tables, trees, diffs, streaming output, keyboard driven TUIs) in the style of Claude Code, Gemini CLI, Crush and lazygit. Covers Bash, Python (Typer, Rich, Textual), TypeScript (Commander, Ink), Go (Cobra, Bubble Tea) and Rust (clap, Ratatui). Use whenever the user asks to create, scaffold, refactor, review or improve a CLI, command, script, terminal app, TUI, REPL, agent console, pipeline wrapper, progress bar, spinner, banner, colored output, --json flag, help text or exit codes, mentions ANSI, TTY or NO_COLOR, or says a tool looks plain, flickers, breaks when piped, or should look like Claude Code. Also use for shell scripts that print to a terminal, even when the user does not say CLI. On an existing, working tool it audits and reports without rewriting what already works.
+description: Builds, reviews and polishes command line tools and terminal UIs that are robust (pipe safe, CI safe, scriptable, typed, tested) and visually excellent (animated teal to blue to violet gradients, spinners, progress, live panels, tables, trees, diffs, streaming output, keyboard driven TUIs) in the style of Claude Code, Gemini CLI, Crush and lazygit. Carries the behaviour layer too: subcommand shape and naming, POSIX option syntax, defaults, prompts and confirmation, help and usage text, error messages and exit codes, stdout versus stderr, piping and structured output, TTY detection, non interactive and CI behaviour, configuration precedence across flags, environment and files, shell completion, accessibility and i18n. Covers Bash, Python (Typer, Rich, Textual), TypeScript (Commander, Ink), Go (Cobra, Bubble Tea) and Rust (clap, Ratatui). Use whenever the user asks to create, scaffold, refactor, review or improve a CLI, command, script, terminal app, TUI, REPL, agent console, pipeline wrapper, progress bar, spinner, banner, colored output, --json flag, help text or exit codes, wires up an argument parser (argparse, click, typer, cobra, clap, commander, oclif) or a setup script prompt, mentions ANSI, TTY or NO_COLOR, or says a tool looks plain, flickers, breaks when piped, or should look like Claude Code. Also use for shell scripts that print to a terminal, even when the user does not say CLI. On an existing, working tool it audits and reports without rewriting what already works.
 license: MIT
 metadata:
   author: Madson A. de Luna Aragao
@@ -59,20 +59,6 @@ times. Point it at a read only subcommand, at `--help`, or at a `--dry-run`
 invocation. Never audit a command that writes, deploys or deletes against real
 data, and say so if no safe invocation exists rather than running it anyway.
 
-## Companion skill: the behaviour layer
-
-This skill owns what the terminal shows. It does not settle every question about
-what the tool does. Subcommand shape and word order, POSIX option syntax,
-configuration precedence, `sysexits.h` style exit codes, man pages and shell
-completion, accessibility and locale live in `cli-design`, which carries a
-component per topic and an audit checklist.
-
-`references/principles.md` here states the non negotiable rules and is enough
-for most tools. Load `cli-design` as well when the question is which commands
-exist, how a flag should be named, where a setting comes from, or when auditing
-a tool against a written checklist. A beautiful tool with an unscriptable
-command surface fails the same review as a correct one with no identity.
-
 ## Read first
 
 Read `references/principles.md` for every task: the non negotiable rules on
@@ -92,8 +78,38 @@ streams, TTY, NO_COLOR, exit codes, --json and help. Then load by need:
 | Go | `references/stack-go.md` |
 | Rust | `references/stack-rust.md` |
 | Auditing an existing tool | `references/review-checklist.md` and `scripts/check_cli.py` |
+| Positional args, flags, options, defaults, secrets on the command line | `references/arguments-and-flags.md` |
+| Command and subcommand structure, naming, word order | `references/subcommands-and-command-shape.md` |
+| Prompting, confirmation, destructive action safety | `references/prompts-and-confirmation.md` |
+| `--help`, usage synopsis, man pages, "did you mean" | `references/help-and-usage.md` |
+| What to print, success output, tables, `--json`, paging | `references/output-and-formatting.md` |
+| ANSI colour rules, `NO_COLOR`, Windows VT | `references/color-and-styling.md` |
+| Error messages, exit codes, `sysexits.h` | `references/errors-and-exit-codes.md` |
+| stdout vs stderr, pipes, `-` for a stream | `references/streams-and-piping.md` |
+| When to show a spinner or a bar at all | `references/progress-and-feedback.md` |
+| TTY detection, `--no-input`, CI, signals | `references/interactivity-tty-and-ci.md` |
+| Flags vs env vars vs config files, precedence, XDG | `references/config-env-and-precedence.md` |
+| Screen readers, colour vision, locale, plain output | `references/accessibility-and-i18n.md` |
+| Testing CLI behaviour and UX | `references/testing-cli-ux.md` |
+| Auditing behaviour against a written checklist | `references/behaviour-review.md` |
+| Authoring and discovery of a skill package | `references/skill-format-and-discovery.md` |
+| Index and keyword map of the behaviour half | `references/behaviour-index.md`, `references/behaviour-topics.json` |
 | Complexity, streaming, concurrency, security of the core | `references/engineering.md` |
 | Drawing the command tree, verifying a library API, recording decisions | `references/mcp-workflow.md` |
+
+## One skill, two halves
+
+Behaviour and appearance ship together here. `references/principles.md` states
+the non negotiable rules and is enough for most tools; the behaviour references
+above go deeper when the question is which commands exist, how a flag should be
+named, where a setting comes from, or how a failure should exit.
+
+Two review checklists, with different scope: `references/review-checklist.md`
+audits what the terminal shows, `references/behaviour-review.md` audits what the
+tool does. A tool passes both or the review is not finished.
+
+Load only what the task needs. The table above is the router; reading every
+reference is never the plan.
 
 ## Language and formatting
 

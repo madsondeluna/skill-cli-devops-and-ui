@@ -5,11 +5,13 @@ PY    := python3
 CLAUDE_SKILLS := $(HOME)/.claude/skills
 INSTALLED     := $(CLAUDE_SKILLS)/cli-devops-with-ultimate-ui
 
-.PHONY: help test audit demo palette package install uninstall verify-install clean
+.PHONY: help test audit refs style check demo palette package install uninstall verify-install clean
 
 help:
 	@echo "test     run the template unit tests"
 	@echo "audit    run the terminal hygiene harness against the demo tool"
+	@echo "refs     check the reference package invariants"
+	@echo "check    test, audit, style and refs, the way CI runs them"
 	@echo "demo     render the component gallery in this terminal"
 	@echo "palette  print the palette and its WCAG contrast table"
 	@echo "package  build dist/cli-devops-with-ultimate-ui.skill for upload to Claude"
@@ -23,6 +25,14 @@ test:
 
 audit:
 	cd $(SKILL) && $(PY) scripts/check_cli.py --timeout 30 -- $(PY) scripts/demo_gallery.py
+
+refs:
+	$(PY) .github/check_references.py
+
+style:
+	$(PY) .github/check_style.py
+
+check: test audit style refs
 
 demo:
 	cd $(SKILL) && $(PY) scripts/demo_gallery.py

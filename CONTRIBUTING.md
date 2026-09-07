@@ -44,7 +44,7 @@ skill it cannot load.
 
 ## Adding a reference
 
-Keep SKILL.md under roughly 300 lines. New material goes in
+Keep SKILL.md under roughly 350 lines. It carries two routers now, one for the visual references and one for the behaviour references, and the file is still the only one always loaded. New material goes in
 `skills/cli-devops-with-ultimate-ui/references/` and gets a row in the router table at the top of
 SKILL.md saying when to read it. A reference nobody is pointed to is a
 reference nobody loads.

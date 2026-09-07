@@ -26,3 +26,7 @@ jobs:
         run: make audit
       - name: House style (no emojis, no em dashes)
         run: python3 .github/check_style.py
+      - name: Reference package invariants
+        # Every reference is reachable from the SKILL.md router, the behaviour
+        # half keeps its shape, and no cross link is broken.
+        run: python3 .github/check_references.py

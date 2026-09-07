@@ -56,6 +56,15 @@ cost the user, and what was verified correct is stated explicitly.
 
 ## What is inside
 
+The skill carries both halves of a command line tool. Behaviour: subcommand
+shape, option syntax, defaults, prompts, help, error messages and exit codes,
+streams and piping, TTY and CI, configuration precedence, accessibility,
+testing, and an audit checklist. Appearance: the aurora theme, the vendorable
+`ui.py`, banner, spinners, progress, panels, launcher, and a terminal hygiene
+harness. They were two skills until they were merged; a tool needs both and
+splitting them meant loading half an answer.
+
+
 ```
 skills/cli-devops-with-ultimate-ui/
   SKILL.md                          modes, shapes, stack choice, workflow, rules, identity
