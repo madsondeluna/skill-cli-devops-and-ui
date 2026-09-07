@@ -16,7 +16,7 @@ safe is what lets visual polish be applied without breaking anything.
 ██║     ██║     ██║    ██║  ██║██╔══╝  ╚██╗ ██╔╝██║   ██║██╔═══╝ ╚════██║
 ╚██████╗███████╗██║    ██████╔╝███████╗ ╚████╔╝ ╚██████╔╝██║     ███████║
  ╚═════╝╚══════╝╚═╝    ╚═════╝ ╚══════╝  ╚═══╝   ╚═════╝ ╚═╝     ╚══════╝
-                    cli-devops-with-ultimate-ui
+                   
 ```
 
 ## Install
