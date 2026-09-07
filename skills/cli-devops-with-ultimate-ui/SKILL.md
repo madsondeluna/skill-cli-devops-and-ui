@@ -94,6 +94,7 @@ streams, TTY, NO_COLOR, exit codes, --json and help. Then load by need:
 | Auditing behaviour against a written checklist | `references/behaviour-review.md` |
 | Authoring and discovery of a skill package | `references/skill-format-and-discovery.md` |
 | Index and keyword map of the behaviour half | `references/behaviour-index.md`, `references/behaviour-topics.json` |
+| Failure modes of the behaviour guidance itself | `references/behaviour-gotchas.md` |
 | Complexity, streaming, concurrency, security of the core | `references/engineering.md` |
 | Drawing the command tree, verifying a library API, recording decisions | `references/mcp-workflow.md` |
 
@@ -109,7 +110,18 @@ audits what the terminal shows, `references/behaviour-review.md` audits what the
 tool does. A tool passes both or the review is not finished.
 
 Load only what the task needs. The table above is the router; reading every
-reference is never the plan.
+reference is never the plan. For the behaviour half the procedure is:
+
+1. Open `references/behaviour-index.md`, or `references/behaviour-topics.json`
+   for the keyword map.
+2. Load only the components the concern touches.
+3. Apply their principles, decision rules and do/don't guidance.
+4. Where established practices conflict, each component states the
+   reconciliation inline. Follow it.
+5. To audit an existing tool, run `references/behaviour-review.md` as a
+   checklist and report findings with severity.
+6. If a needed point is not covered, say so and mark it `TODO`. Never invent a
+   convention.
 
 ## Language and formatting
 
@@ -331,3 +343,9 @@ with its fix, plus a patched file when the fix is mechanical.
   detect. Pass `no_color=True, color_system=None` for non TTY streams.
 - Garbled glyphs: locale not UTF-8. Check `sys.stdout.encoding` and `LANG`;
   offer `TOOL_ASCII=1`.
+
+## Sources
+
+Original content, informed by the GNU Coding Standards, the POSIX utility
+conventions, Microsoft's .NET command line guidance, the Agent Skills format,
+and the terminal work of Charm, Textual and Rich.
