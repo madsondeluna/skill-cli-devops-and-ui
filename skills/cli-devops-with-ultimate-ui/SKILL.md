@@ -59,6 +59,20 @@ times. Point it at a read only subcommand, at `--help`, or at a `--dry-run`
 invocation. Never audit a command that writes, deploys or deletes against real
 data, and say so if no safe invocation exists rather than running it anyway.
 
+## Companion skill: the behaviour layer
+
+This skill owns what the terminal shows. It does not settle every question about
+what the tool does. Subcommand shape and word order, POSIX option syntax,
+configuration precedence, `sysexits.h` style exit codes, man pages and shell
+completion, accessibility and locale live in `cli-design`, which carries a
+component per topic and an audit checklist.
+
+`references/principles.md` here states the non negotiable rules and is enough
+for most tools. Load `cli-design` as well when the question is which commands
+exist, how a flag should be named, where a setting comes from, or when auditing
+a tool against a written checklist. A beautiful tool with an unscriptable
+command surface fails the same review as a correct one with no identity.
+
 ## Read first
 
 Read `references/principles.md` for every task: the non negotiable rules on
