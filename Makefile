@@ -5,13 +5,14 @@ PY    := python3
 CLAUDE_SKILLS := $(HOME)/.claude/skills
 INSTALLED     := $(CLAUDE_SKILLS)/cli-devops-with-ultimate-ui
 
-.PHONY: help test audit refs style check demo palette package install uninstall verify-install clean
+.PHONY: help test audit refs style check example demo palette package install uninstall verify-install clean
 
 help:
 	@echo "test     run the template unit tests"
 	@echo "audit    run the terminal hygiene harness against the demo tool"
 	@echo "refs     check the reference package invariants"
 	@echo "check    test, audit, style and refs, the way CI runs them"
+	@echo "example  build examples/pseq in a temp venv, run its tests and the harness"
 	@echo "demo     render the component gallery in this terminal"
 	@echo "palette  print the palette and its WCAG contrast table"
 	@echo "package  build dist/cli-devops-with-ultimate-ui.skill for upload to Claude"
@@ -28,6 +29,27 @@ audit:
 
 refs:
 	$(PY) .github/check_references.py
+
+EXAMPLE := examples/pseq
+
+# The example demonstrates the template, so a copy that has drifted from it
+# demonstrates nothing. Compared before anything else runs.
+example:
+	@diff $(SKILL)/assets/templates/python/ui.py $(EXAMPLE)/src/pseq/ui.py >/dev/null \
+		&& echo "example vendors the current ui.py" \
+		|| { echo "$(EXAMPLE) vendors a stale ui.py; re-copy the template"; exit 1; }
+	@# The tool needs 3.10 or newer, and the default python3 is older on macOS.
+	@py=$$(for c in $(PY) python3.13 python3.12 python3.11 python3.10; do \
+		command -v $$c >/dev/null 2>&1 && $$c -c 'import sys; sys.exit(0 if sys.version_info >= (3,10) else 1)' 2>/dev/null \
+		&& { echo $$c; break; }; done); \
+	test -n "$$py" || { echo "needs Python 3.10 or newer"; exit 1; }; \
+	echo "example interpreter: $$($$py -V)"; \
+	venv=$$(mktemp -d)/venv && $$py -m venv $$venv && \
+	$$venv/bin/python -m pip -q install --upgrade pip && \
+	$$venv/bin/pip -q install -e "$(EXAMPLE)[dev]" && \
+	( cd $(EXAMPLE) && $$venv/bin/pytest -q ) && \
+	$(PY) $(SKILL)/scripts/check_cli.py --timeout 30 -- \
+		$$venv/bin/pseq stats $(EXAMPLE)/examples/sample.fa
 
 style:
 	$(PY) .github/check_style.py

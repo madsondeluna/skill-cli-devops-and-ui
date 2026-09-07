@@ -94,6 +94,23 @@ skills/cli-devops-with-ultimate-ui/
     templates/typescript/theme.ts   vendorable module for Ink
 ```
 
+## Example
+
+`examples/pseq/` is a working tool built from this skill: a protein FASTA
+analyser with seven subcommands, colour by role, a gradient banner, a spinner
+and a progress bar on stderr, bars that shrink with the window, plain TSV when
+piped, and 34 tests including a pseudo terminal suite. It is the answer to
+"what does a tool from this skill look like", and CI runs its tests and points
+the hygiene harness at it on every push.
+
+```
+make example    # installs it in a temp venv, runs its tests and the harness
+```
+
+The vendored `ui.py` inside it is compared against the template on every run.
+An example that has silently drifted from the thing it demonstrates is worse
+than no example.
+
 ## Identity
 
 Theme `aurora`: teal `#3DDBC7` into blue `#5B9CFF` into violet `#C084FC`,

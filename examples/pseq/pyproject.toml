@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pseq"
+version = "0.1.0"
+description = "Protein FASTA analysis from the command line"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["typer>=0.12", "rich>=13"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8"]
+
+[project.scripts]
+pseq = "pseq.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pseq"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

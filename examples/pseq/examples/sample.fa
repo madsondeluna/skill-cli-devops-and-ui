@@ -1,0 +1,15 @@
+>UBIQ human ubiquitin (UniProt P0CG48)
+MQIFVKTLTGKTITLEVEPSDTIENVKAKIQDKEGIPPDQQRLIFAGKQLEDGRTLSDYN
+IQKESTLHLVLRLRGG
+>demo_acidic synthetic acidic peptide
+MDEEDSEEDSDEEGSDDEWDEEDSEEDA
+>demo_basic synthetic basic peptide
+MKKRKHRKKAKRHKKRAKKHRKKAR
+>demo_hydrophobic synthetic transmembrane-like stretch
+MLLIVVGAILFAVLGLIVGAVLIAGFLLVAGIILVA
+>demo_glyco carries four N-X-S/T sequons
+MGTPANQSVLKNGTFDAENVSAWQPNRSLK
+>demo_ambiguous contains an ambiguous residue
+MKTAYXIAKQRQISFVKSHFSRQ
+>demo_short below most length filters
+MKTAY
