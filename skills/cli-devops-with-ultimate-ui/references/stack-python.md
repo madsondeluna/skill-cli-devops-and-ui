@@ -15,7 +15,7 @@ Packaging: `pyproject.toml` with a `[project.scripts]` entry point, install with
 ## Start from the template
 
 `assets/templates/python/ui.py` is the finished output module: copy it into
-the package, set `CLI_CRAFT_TOOL_NAME` to the tool name (or edit the `TOOL`
+the package, set `CLI_TOOL_NAME` to the tool name (or edit the `TOOL`
 constant) and import it everywhere output happens. `test_ui.py` next to it is
 the matching unittest module. `scripts/demo_gallery.py` shows the template
 used by a complete shape 1 tool. The section below explains what the template

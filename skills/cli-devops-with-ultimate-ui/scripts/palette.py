@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Show the cli-craft palette or emit it for a stack.
+"""Show the cli-devops-with-ultimate-ui palette or emit it for a stack.
 
 Usage:
   python scripts/palette.py                # swatches in the current terminal

@@ -1,5 +1,5 @@
 ---
-name: cli-craft
+name: cli-devops-with-ultimate-ui
 description: Builds, reviews and polishes command line tools and terminal UIs that are robust (pipe safe, CI safe, scriptable, typed, tested) and visually excellent (animated teal to blue to violet gradients, spinners, progress, live panels, tables, trees, diffs, streaming output, keyboard driven TUIs) in the style of Claude Code, Gemini CLI, Crush and lazygit. Covers Bash, Python (Typer, Rich, Textual), TypeScript (Commander, Ink), Go (Cobra, Bubble Tea) and Rust (clap, Ratatui). Use whenever the user asks to create, scaffold, refactor, review or improve a CLI, command, script, terminal app, TUI, REPL, agent console, pipeline wrapper, progress bar, spinner, banner, colored output, --json flag, help text or exit codes, mentions ANSI, TTY or NO_COLOR, or says a tool looks plain, flickers, breaks when piped, or should look like Claude Code. Also use for shell scripts that print to a terminal, even when the user does not say CLI. On an existing, working tool it audits and reports without rewriting what already works.
 license: MIT
 metadata:
@@ -9,7 +9,7 @@ metadata:
   tags: [cli, tui, terminal, python, typescript, rich, textual, ink, typer, go, rust]
 ---
 
-# cli-craft
+# cli-devops-with-ultimate-ui
 
 Build command line tools that a systems engineer trusts and a designer
 admires. The two goals are not in tension: the discipline that makes output

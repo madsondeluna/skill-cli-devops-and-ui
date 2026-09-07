@@ -1,5 +1,5 @@
 {
-  "_comment": "cli-craft default theme 'aurora'. Roles, not raw colors, are what code refers to. dark and light are the truecolor sets; c256 and c16 are the fallbacks. gradient stops are decorative only and never carry text.",
+  "_comment": "cli-devops-with-ultimate-ui default theme 'aurora'. Roles, not raw colors, are what code refers to. dark and light are the truecolor sets; c256 and c16 are the fallbacks. gradient stops are decorative only and never carry text.",
   "name": "aurora",
   "dark": {
     "fg": "#E6E9F0",

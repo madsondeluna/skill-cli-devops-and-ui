@@ -18,10 +18,25 @@ def is_emoji(ch: str) -> bool:
     return 0x1F300 <= o <= 0x1FAFF or 0x2600 <= o <= 0x26FF or o in (0x2705, 0x274C, 0x2728, 0x2B50)
 
 
+# macOS writes an AppleDouble sidecar (._name) next to every file edited on a
+# non native volume, and those are not UTF-8. They are already in .gitignore;
+# the walk has to skip them too, or the check fails on files git never sees.
+SKIP_DIRS = {"__pycache__", ".git", "dist", "build", ".venv", ".pytest_cache", ".ruff_cache"}
+SKIP_SUFFIXES = {".skill", ".zip", ".png", ".jpg", ".gif", ".pdf", ".woff", ".woff2"}
+
+
+def skipped(path: Path) -> bool:
+    if SKIP_DIRS & set(path.parts):
+        return True
+    if path.name.startswith("._") or path.name == ".DS_Store":
+        return True
+    return path.suffix.lower() in SKIP_SUFFIXES
+
+
 def main() -> int:
     findings = []
     for path in sorted(ROOT.rglob("*")):
-        if not path.is_file() or "__pycache__" in path.parts:
+        if not path.is_file() or skipped(path):
             continue
         try:
             text = path.read_text(encoding="utf-8")

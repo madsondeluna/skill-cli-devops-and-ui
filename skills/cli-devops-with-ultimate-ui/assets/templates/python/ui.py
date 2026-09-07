@@ -1,4 +1,4 @@
-"""Terminal UI layer for CLIs built with cli-craft.
+"""Terminal UI layer for CLIs built with cli-devops-with-ultimate-ui.
 
 Copy this file into your package (for example `mytool/ui.py`). It is the only
 module that knows about TTYs, colors and animation. Everything else in the
@@ -29,7 +29,6 @@ from __future__ import annotations
 import json
 import locale
 import math
-import math
 import os
 import re
 import signal
@@ -46,7 +45,7 @@ from rich.progress import (MofNCompleteColumn, Progress, ProgressColumn, Task,
 from rich.text import Text
 from rich.theme import Theme
 
-TOOL = os.environ.get("CLI_CRAFT_TOOL_NAME", "tool").upper()
+TOOL = os.environ.get("CLI_TOOL_NAME", "tool").upper()
 
 # ---------------------------------------------------------------------------
 # Environment detection: one pass, one source of truth.

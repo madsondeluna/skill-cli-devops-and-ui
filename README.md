@@ -1,4 +1,4 @@
-# cli-craft
+# cli-devops-with-ultimate-ui
 
 A Claude skill for building and reviewing command line tools and terminal user
 interfaces that are robust (pipe safe, CI safe, scriptable, typed, tested) and
@@ -20,15 +20,24 @@ safe is what lets visual polish be applied without breaking anything.
 
 ## Install
 
-Download `cli-craft.skill` from the latest release, or build it:
+Download `cli-devops-with-ultimate-ui.skill` from the latest release, or build it:
 
 ```
-make package        # writes dist/cli-craft.skill
+make package        # writes dist/cli-devops-with-ultimate-ui.skill
 ```
 
 Claude.ai: Settings, Capabilities, Skills, Upload skill.
-Claude Code: unzip into your skills directory, or copy `skills/cli-craft/`
-into `.claude/skills/`.
+
+Claude Code:
+
+```
+make install          # copies into ~/.claude/skills/cli-devops-with-ultimate-ui
+make verify-install   # fails when the installed copy has drifted from this tree
+```
+
+A skill that lives only in this repository is not available to Claude Code. If
+the model names the skill and then cannot load it, the installed copy is
+missing or stale; `make install` is the fix.
 
 Then ask for a CLI. The skill triggers on requests to create, review or polish
 any command line tool, TUI, REPL, agent console, progress bar, banner, help
@@ -48,7 +57,7 @@ cost the user, and what was verified correct is stated explicitly.
 ## What is inside
 
 ```
-skills/cli-craft/
+skills/cli-devops-with-ultimate-ui/
   SKILL.md                          modes, shapes, stack choice, workflow, rules, identity
   references/
     principles.md                   streams, capability detection, --json, help, exit codes, errors
@@ -114,7 +123,7 @@ make test      # unit tests for the vendorable template
 make audit     # terminal hygiene harness against the demo tool
 make demo      # render the gallery in this terminal
 make palette   # palette and WCAG contrast table
-make package   # build dist/cli-craft.skill
+make package   # build dist/cli-devops-with-ultimate-ui.skill
 ```
 
 CI runs the tests, the harness and the house style check on Python 3.10 and

@@ -18,7 +18,7 @@ import sys
 import time
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "assets", "templates", "python"))
-os.environ.setdefault("CLI_CRAFT_TOOL_NAME", "gallery")
+os.environ.setdefault("CLI_TOOL_NAME", "gallery")
 
 import ui  # noqa: E402
 from rich.table import Table  # noqa: E402
@@ -33,7 +33,7 @@ EXAMPLES = """examples:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        prog="gallery", description="cli-craft component gallery.",
+        prog="gallery", description="cli-devops-with-ultimate-ui component gallery.",
         epilog=EXAMPLES, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--json", action="store_true", help="emit a JSON summary on stdout")
     parser.add_argument("--color", choices=["auto", "always", "never"], default="auto",
@@ -57,7 +57,7 @@ def main(argv: list[str] | None = None) -> int:
 
     # 1. banner: ASCII art title, animated slogan, general options
     ui.banner(
-        "cli-craft",
+        "cli-devops",
         "terminal tools that read well and pipe cleanly",
         options=[("gallery", "render every component"),
                  ("--json", "machine readable summary"),

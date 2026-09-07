@@ -28,7 +28,7 @@ export interface Env {
   lightBg: boolean;
 }
 
-const TOOL = (process.env.CLI_CRAFT_TOOL_NAME ?? "tool").toUpperCase();
+const TOOL = (process.env.CLI_TOOL_NAME ?? "tool").toUpperCase();
 
 function detectDepth(): Depth {
   const force = process.env.FORCE_COLOR;
