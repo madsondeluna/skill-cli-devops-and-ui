@@ -8,6 +8,10 @@ thing to read when the question is what a finished tool built from here looks
 like. `src/pseq/ui.py` is the vendored template, copied unchanged;
 `make example` in the repository root fails if the two drift apart.
 
+![The pseq banner and command list](../../docs/pseq-banner.png)
+
+![The stats table, with the spinner, the progress bar and the bars](../../docs/pseq-stats.png)
+
 Run it:
 
 ```

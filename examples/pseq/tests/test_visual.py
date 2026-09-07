@@ -40,6 +40,9 @@ def run_tty(*args, cols=100, env=None, split_err=True, animate=False):
             os.environ["PSEQ_NO_ANIMATION"] = "1"
         else:
             os.environ.pop("PSEQ_NO_ANIMATION", None)
+            # CI desliga a animacao de proposito. Para exercitar o caminho
+            # animado, a variavel sai do ambiente do filho.
+            os.environ.pop("CI", None)
         os.environ.update(
             COLORTERM="truecolor", TERM="xterm-256color", COLUMNS=str(cols), **(env or {})
         )
@@ -150,6 +153,12 @@ def test_animation_redraws_in_place_and_returns_the_cursor():
     assert "\x1b[?25l" in out and "\x1b[?25h" in out      # cursor escondido e devolvido
     assert CURSOR_UP.search(out)                          # quadros redesenhados no lugar
     assert "\x1b[?2026h" in out and "\x1b[?2026l" in out  # cada quadro em uma pintura so
+
+
+def test_ci_disables_animation():
+    """Uma barra que redesenha no lugar polui um log de integracao continua."""
+    out, _, rc = run_tty(split_err=False, animate=True, env={"CI": "true"})
+    assert rc == 0 and not CURSOR_UP.search(out)
 
 
 def test_no_animation_env_var_is_honored():

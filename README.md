@@ -107,6 +107,12 @@ the hygiene harness at it on every push.
 make example    # installs it in a temp venv, runs its tests and the harness
 ```
 
+`pseq` with no command, and `pseq stats` on the sample file:
+
+![The pseq banner and command list](docs/pseq-banner.png)
+
+![The stats table, with the spinner, the progress bar and the bars](docs/pseq-stats.png)
+
 The vendored `ui.py` inside it is compared against the template on every run.
 An example that has silently drifted from the thing it demonstrates is worse
 than no example.
