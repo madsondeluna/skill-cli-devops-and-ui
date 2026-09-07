@@ -59,7 +59,7 @@ uninstall:
 # model lists a skill by name and then cannot load it.
 verify-install:
 	@test -d $(INSTALLED) || { echo "not installed; run: make install"; exit 1; }
-	@diff -r -x '__pycache__' -x '*.pyc' $(SKILL) $(INSTALLED) >/dev/null \
+	@diff -r -x '__pycache__' -x '*.pyc' -x '._*' -x '.DS_Store' $(SKILL) $(INSTALLED) >/dev/null \
 		&& echo "installed copy matches the repository" \
 		|| { echo "installed copy differs; run: make install"; exit 1; }
 
