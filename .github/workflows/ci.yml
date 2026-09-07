@@ -26,7 +26,7 @@ jobs:
         run: make audit
       - name: House style (no emojis, no em dashes)
         run: python3 .github/check_style.py
-      - name: Example tool: tests and hygiene harness
+      - name: Example tool, tests and hygiene harness
         # examples/pseq is built from this skill. If it stops passing, the skill
         # is telling people to do something that no longer works.
         run: make example
